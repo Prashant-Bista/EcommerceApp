@@ -1,9 +1,10 @@
-import 'package:ecommerce_app/home_page/home_page_view.dart';
 import 'package:ecommerce_app/services/route_service/route_constants.dart';
 import 'package:ecommerce_app/services/route_service/route_controller.dart';
-import 'package:ecommerce_app/splash_page/splash_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../pages/home_page/home_page_view.dart';
+import '../../pages/splash_page/splash_view.dart';
 
 
 RouteController routeController = RouteController();

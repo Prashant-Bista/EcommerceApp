@@ -3,8 +3,8 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 
-import '../services/http_service/dio_service.dart';
-import '../services/route_service/routes.dart';
+import '../../services/route_service/routes.dart';
+
 
 class SplashController{
   late TickerProvider tickerProvider;

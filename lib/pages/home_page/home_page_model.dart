@@ -1,6 +1,8 @@
+import 'package:ecommerce_app/common/model/product_model.dart';
+
 class HomePageModel {
   int selectedIndex;
-List<dynamic>? products;
+List<ProductModel>? products;
   HomePageModel({this.selectedIndex = 0,this.products});
 
   factory HomePageModel.initial(){
@@ -10,10 +12,10 @@ List<dynamic>? products;
     );
   }
 
-   HomePageModel copyWith({int? selectedIndex,List<dynamic>? products}){
+   HomePageModel copyWith({int? selectedIndex,List<ProductModel>? products}){
     return HomePageModel(
       selectedIndex: selectedIndex ?? 0,
-      products: products??[]
+      products: products??<ProductModel>[]
     );
   }
 }

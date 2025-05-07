@@ -1,40 +1,35 @@
-import 'dart:convert';
+
+import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'package:ecommerce_app/services/exceptionService/exceptionService.dart';
+import 'package:ecommerce_app/common/model/product_model.dart';
 
 class DioService {
-  DioService._privateCostructor();
-  static final DioService _instance =   DioService._privateCostructor();
   final Dio dio = Dio(
-      BaseOptions(
-        baseUrl: "https://fakestoreapi.com/",
-        connectTimeout: Duration(seconds: 10),
-        sendTimeout: Duration(seconds: 10),
-      ),
+    BaseOptions(
+      baseUrl: "https://fakestoreapi.com/",
+      sendTimeout: Duration(seconds: 10),
+      connectTimeout: Duration(seconds: 10),
     )
-    ..interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {},
-        onResponse: (options, handler) {},
-      ),
     );
-  Future<void> fetchProducts() async{
-    late Response response;
-    List<dynamic> products=[];
-    ExceptionService.handleException(
-      tryFunc: () async {
-        response = await dio.get("products");
-        if (response.statusCode == 200) {
-        products= jsonDecode(response.data);
-        }
-      },
-      finallyFunc: () {
-
-      },
-    );
+  Future<List<ProductModel>?> fetchProducts() async{
+    List<ProductModel> products=[];
+    print("entered Fetch Products");
+     final response = await dio.get("products",);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      List<dynamic> result = response.data;
+      result.forEach((json){
+        products.add(ProductModel.fromJson(json));
+      } );
+      return products;
+    }
+    else{
+      print("dio error");
+    }
+    return null;
   }
 }
- DioService get dioService => DioService._instance;
+ DioService get dioService => DioService();
 
 

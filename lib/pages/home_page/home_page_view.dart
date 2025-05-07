@@ -1,9 +1,10 @@
 import 'package:ecommerce_app/common/widgets/custom_app_bar.dart';
-import 'package:ecommerce_app/home_page/home_page_controller.dart';
-import 'package:ecommerce_app/home_page/home_page_model.dart';
-import 'package:ecommerce_app/services/http_service/dio_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'home_page_controller.dart';
+import 'home_page_model.dart';
 
 class HomePageView extends ConsumerWidget {
   HomePageView({super.key});
@@ -13,12 +14,21 @@ class HomePageView extends ConsumerWidget {
       StateNotifierProvider<HomeController, HomePageModel>(
         (ref) => HomeController(),
       );
+
   @override
   Widget build(BuildContext context, ref) {
 
     homeController = ref.watch(homePageDataController.notifier);
     homeData = ref.watch(homePageDataController);
+    // homeController.getAllProducts();
+
     return Scaffold(
+      body: Column(
+        children: [
+          IconButton(onPressed: (){
+          }, icon: Icon(Icons.add))
+        ],
+      ),
       appBar: CustomAppBar(title: "HomePage", toolBarHeight: 40),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: homeData.selectedIndex,
