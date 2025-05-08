@@ -1,3 +1,5 @@
+import 'package:ecommerce_app/common/model/product_model.dart';
+import 'package:ecommerce_app/pages/product_details/product_details_view.dart';
 import 'package:ecommerce_app/services/route_service/route_constants.dart';
 import 'package:ecommerce_app/services/route_service/route_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +31,11 @@ GoRouter router = GoRouter(
               return HomePageView(key: state.pageKey);
             },
           ),
+          GoRoute(path: RouteConstants.productDetail,name: RouteConstants.productDetail,builder: (context,state){
+            routeController.setContext(context: context);
+            Map<String, dynamic>? extra = state.extra as Map<String,dynamic>;
+            return ProductDetailsView(product: extra.isNotEmpty?extra["product"]:ProductModel.initial());
+          })
         ]
     ),
 

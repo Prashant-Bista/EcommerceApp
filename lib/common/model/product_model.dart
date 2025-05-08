@@ -21,6 +21,17 @@ class ProductModel{
       price :json["price"].toDouble(),
     );
   }
+  factory ProductModel.initial(){
+    return ProductModel(
+      id:0,
+      title: "",
+      description: "",
+      category: "",
+      image: "",
+      rating: RatingModel.fromJson({"rate":0.0,"count":0}),
+      price: 0.0,
+    );
+  }
   toJson(){
     return {
       "id" :id ,

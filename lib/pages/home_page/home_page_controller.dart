@@ -13,10 +13,11 @@ setCurrentIndex(int index){
    state  = state.copyWith(selectedIndex: index, products: state.products!, currentCategory: state.selectedCategory!);
 }
 setCategory(int index){
-    state = state.copyWith(selectedIndex: index, products: state.products!, currentCategory: Categories.values[index]);
+    state = state.copyWith(selectedIndex: state.selectedIndex, products: state.products!, currentCategory: Categories.values[index]);
 }
 getAllProducts() async{
   List<ProductModel>? products=  await dioService.fetchProducts();
   state  = state.copyWith(selectedIndex: state.selectedIndex, products: products!, currentCategory: state.selectedCategory!);
+  print(state.products);
 }
 }

@@ -34,7 +34,17 @@ routeToSplashPage({bool shouldRemovePrevious=false, Map<String,dynamic>? extra})
 
       }
     }
-
   }
+  routeToProducts({bool shouldRemovePrevious=false,Map<String,dynamic>? extra}){
+    if(ctx!=null){
+      if(shouldRemovePrevious){
+        ctx?.goNamed(RouteConstants.productDetail,extra: extra);
+  }
+      else{
+        ctx?.pushNamed(RouteConstants.productDetail,extra: extra);
+  }
+  }
+  }
+
 
 }

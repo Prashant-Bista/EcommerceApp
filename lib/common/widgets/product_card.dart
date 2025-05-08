@@ -1,7 +1,8 @@
+import 'package:ecommerce_app/common/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
-  final dynamic product;
+  final ProductModel product;
   const ProductCard({super.key, required this.product});
 
   @override
@@ -13,12 +14,13 @@ class ProductCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
+            product.image!.isNotEmpty?
             Image.network(
-              product["image"],
+              product.image!,
               fit: BoxFit.contain,
               height: 150,
               width: 130,
-            ),
+            ):SizedBox(height: 150,width: 130,),
             const SizedBox(
               width: 8,
             ),
@@ -27,7 +29,7 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product["title"],
+                  product.title!,
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                   maxLines: 2,
@@ -37,7 +39,7 @@ class ProductCard extends StatelessWidget {
                   height: 8,
                 ),
                 Text(
-                  "\$${product["price"].toStringAsFixed(2)}",
+                  "\$${product.price?.toStringAsFixed(2)}",
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -56,7 +58,7 @@ class ProductCard extends StatelessWidget {
                     const SizedBox(
                       width: 4,
                     ),
-                    Text(product["rating"]["rate"].toString(),
+                    Text(product.rating!.rate.toString(),
                         style: const TextStyle(
                             fontSize: 14, color: Colors.deepPurple))
                   ],
