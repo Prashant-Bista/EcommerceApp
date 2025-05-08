@@ -1,19 +1,29 @@
 import 'package:ecommerce_app/common/model/product_model.dart';
+import 'package:ecommerce_app/pages/product_details/product_detail_controller.dart';
+import 'package:ecommerce_app/pages/product_details/product_detail_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common/widgets/custom_app_bar.dart';
 
 
-class ProductDetailsView extends StatelessWidget {
+class ProductDetailsView extends ConsumerWidget {
   final ProductModel product;
   ProductDetailsView({super.key, required this.product});
+ late  final productDetailControllerProvider=StateNotifierProvider<ProductDetailController,ProductDetailModel>((ref){
+  return ProductDetailController(state: ProductDetailModel(quantity: 1,product: product,addedToCart: false));
+  });
+  late ProductDetailController productDetailController;
+  late ProductDetailModel productDetailData;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,ref) {
+    productDetailController = ref.watch(productDetailControllerProvider.notifier);
+    productDetailData  = ref.watch(productDetailControllerProvider);
     int quantity = 1;
     return Scaffold(
       appBar: CustomAppBar(
-        title: product.title!,
+        title: productDetailData.product!.title!,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -22,7 +32,7 @@ class ProductDetailsView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(
-                product.image!,
+                productDetailData.product!.image!,
                 width: double.infinity,
                 height: 300,
                 fit: BoxFit.contain,
@@ -31,7 +41,7 @@ class ProductDetailsView extends StatelessWidget {
                 height: 16,
               ),
               Text(
-                "\$${product.price!.toStringAsFixed(2)}",
+                "\$${productDetailData.product!.price!.toStringAsFixed(2)}",
                 style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -51,13 +61,13 @@ class ProductDetailsView extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    "\$${product.rating?.rate.toString()}",
+                    "\$${productDetailData.product!.rating?.rate.toString()}",
                   ),
                   const SizedBox(
                     width: 4,
                   ),
                   Text(
-                    "\$${product.rating?.count.toString()} reviews",
+                    "\$${productDetailData.product!.rating?.count.toString()} reviews",
                   ),
                 ],
               ),
@@ -65,7 +75,7 @@ class ProductDetailsView extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                product.description!,
+                productDetailData.product!.description!,
                 style: TextStyle(fontSize: 16, color: Colors.grey[700]),
               ),
               const SizedBox(
@@ -75,7 +85,7 @@ class ProductDetailsView extends StatelessWidget {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                      //decrease quantity
+                        productDetailController.decreaseQty();
                       },
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 4),
@@ -90,7 +100,7 @@ class ProductDetailsView extends StatelessWidget {
                     width: 8,
                   ),
                   Text(
-                    quantity.toString(),
+                    productDetailData.quantity.toString(),
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -99,7 +109,7 @@ class ProductDetailsView extends StatelessWidget {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        //increase qty
+                        productDetailController.increaseQty();
                       },
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 4),
@@ -139,15 +149,13 @@ class ProductDetailsView extends StatelessWidget {
                   Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          // addToCart();
-                        },
+productDetailController.addRemoveFromCardTocart();                        },
                         style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8)),
                             backgroundColor: Colors.deepPurple),
-                        child: const Text(
-                          "Add to Cart",
+                        child:  Text("${productDetailData.addedToCart!?"Remove":"Add"} to Cart",
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,

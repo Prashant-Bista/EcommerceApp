@@ -107,6 +107,7 @@ class HomePageView extends ConsumerWidget {
                       child: ProductCard(product: ProductModel.initial()),
                     )
                     : InkWell(onTap:(){
+
                       routeController.routeToProducts(extra: {"product":homeData.products![index]});
                 },child: ProductCard(product: homeData.products![index]));
               },
