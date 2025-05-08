@@ -1,21 +1,26 @@
 import 'package:ecommerce_app/common/model/product_model.dart';
 
+import '../../common/enums/categories.dart';
+
 class HomePageModel {
   int selectedIndex;
 List<ProductModel>? products;
-  HomePageModel({this.selectedIndex = 0,this.products});
+Categories? selectedCategory;
+  HomePageModel({this.selectedIndex = 0,this.products,this.selectedCategory});
 
   factory HomePageModel.initial(){
     return HomePageModel(
         selectedIndex: 0,
-      products: []
+      products: [],
+      selectedCategory: Categories.all
     );
   }
 
-   HomePageModel copyWith({int? selectedIndex,List<ProductModel>? products}){
+   HomePageModel copyWith({required int selectedIndex,required List<ProductModel> products,required Categories currentCategory}){
     return HomePageModel(
-      selectedIndex: selectedIndex ?? 0,
-      products: products??<ProductModel>[]
+      selectedIndex: selectedIndex ,
+      products: products,
+      selectedCategory: currentCategory,
     );
   }
 }
