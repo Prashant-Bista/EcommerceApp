@@ -149,7 +149,7 @@ class ProductDetailsView extends ConsumerWidget {
                   Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-productDetailController.addRemoveFromCardTocart();                        },
+productDetailController.addRemoveFromCardTocart(context);                        },
                         style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             shape: RoundedRectangleBorder(

@@ -8,6 +8,7 @@ import 'home_page_model.dart';
 class HomeController extends StateNotifier<HomePageModel>{
   HomeController({HomePageModel? state}):super(state??HomePageModel.initial()){
     getAllProducts();
+
   }
 setCurrentIndex(int index){
    state  = state.copyWith(selectedIndex: index, products: state.products!, currentCategory: state.selectedCategory!);

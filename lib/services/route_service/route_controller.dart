@@ -45,6 +45,17 @@ routeToSplashPage({bool shouldRemovePrevious=false, Map<String,dynamic>? extra})
   }
   }
   }
+  routeToMainScreen({bool shouldRemovePrevious=false,Map<String,dynamic>? extra}){
+    if(ctx!=null){
+      if(shouldRemovePrevious){
+        ctx?.goNamed(RouteConstants.mainScreen,extra: extra);
+      }
+      else{
+        ctx?.pushNamed(RouteConstants.mainScreen,extra: extra);
+      }
+    }
+  }
+
 
 
 }

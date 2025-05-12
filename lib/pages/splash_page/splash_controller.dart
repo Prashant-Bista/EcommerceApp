@@ -14,7 +14,7 @@ class SplashController{
   late GetIt getIt;
   SplashController({required this.tickerProvider}){
     getIt = GetIt.instance;
-    splashAnimationController = AnimationController(vsync: tickerProvider,duration: Duration(seconds: 2,),)..forward().then((value)=>routeController.routeToHomePage());
+    splashAnimationController = AnimationController(vsync: tickerProvider,duration: Duration(seconds: 2,),)..forward().then((value)=>routeController.routeToMainScreen());
     tween1 = Tween<Offset>(begin: Offset(-200, 0),end: Offset(0, 0)).animate(splashAnimationController);
     tween2 = Tween<Offset>(begin:Offset(200, 0) ,end: Offset(0, 0)).animate(splashAnimationController);
   setup();
