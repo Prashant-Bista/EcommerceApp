@@ -28,9 +28,6 @@ class HomePageView extends ConsumerWidget {
   Widget build(context, ref) {
     homeController = ref.watch(homePageDataController.notifier);
     homeData = ref.watch(homePageDataController);
-    Size mQSize = MediaQuery
-        .of(context)
-        .size;
 
     return SizedBox(
       height: 705,
