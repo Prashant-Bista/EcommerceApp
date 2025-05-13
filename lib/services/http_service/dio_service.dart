@@ -29,6 +29,23 @@ class DioService {
     }
     return null;
   }
+  Future<ProductModel?> fetchProductById(int id) async{
+    ProductModel product;
+    print("entered Fetch Products");
+    final response = await dio.get("products/$id",);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      Map<String,dynamic> result = response.data;
+     product = ProductModel.fromJson(result);
+     print("product $product");
+      return product;
+    }
+    else{
+      print("dio error");
+    }
+    return null;
+  }
+
 }
  DioService get dioService => DioService();
 

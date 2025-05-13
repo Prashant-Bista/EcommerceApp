@@ -22,7 +22,7 @@ class ShoppingCart extends ConsumerWidget {
       height: 705,
       child: Scaffold(
         appBar: CustomAppBar(title: "Shopping Cart"),
-        body: cartData.cartItems!.isEmpty?ListView.builder(
+        body: cartData.cartItems!.isNotEmpty?ListView.builder(
             itemCount: cartData.cartItems!.length,
             itemBuilder: (context, index) {
               print("index $index");
@@ -72,21 +72,19 @@ class ShoppingCart extends ConsumerWidget {
                                 children: [
                                   IconButton(
                                       onPressed: () {
-                                        // updateQuantity(
-                                        //     item['id'], item['quantity'] - 1);
+                                        cartController.updateQuantity(index, cartData.cartItems![index].quantity!-1);
                                       },
                                       icon: const Icon(Icons.remove)),
                                   Text('Quantity: ${ item.quantity}'),
                                   IconButton(
                                       onPressed: () {
-                                        // updateQuantity(
-                                        //     item['id'], item['quantity'] + 1);
+                                        cartController.updateQuantity(index, cartData.cartItems![index].quantity!+1);
                                       },
                                       icon: const Icon(Icons.add)),
                                   const Spacer(),
                                   IconButton(
                                       onPressed: () {
-                                        // deleteQuantity(item['id']);
+                                        cartController.deleteQuantity(index);
                                       },
                                       icon: const Icon(Icons.delete))
                                 ],
@@ -98,7 +96,7 @@ class ShoppingCart extends ConsumerWidget {
                 ),
               );
             },
-            ):CircularProgressIndicator(),
+            ):Center(child: CircularProgressIndicator()),
       ),
     );
   }

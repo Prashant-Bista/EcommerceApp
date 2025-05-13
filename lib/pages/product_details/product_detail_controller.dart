@@ -6,13 +6,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductDetailController extends StateNotifier<ProductDetailModel> {
-  ProductDetailController({required ProductDetailModel state}) : super(state);
-  selectProductForDetailView(ProductModel product) {
-    state = state.copyWith(
-      qty: state.quantity,
-      product: product,
-      isCartAdded: state.addedToCart,
-    );
+  ProductDetailController({required ProductDetailModel state}) : super(state){
+    selectProductForDetailView(state.product!);
+  }
+  selectProductForDetailView(ProductModel product) async {
+    final prefs = await SharedPreferences.getInstance();
+    Set<String> keys =prefs.getKeys();
+    print("keys $keys");
+    if(keys.contains("productId_${product.id}")){
+      state = state.copyWith(
+        qty: prefs.getInt("productId_${product.id}"),
+        product: product,
+        isCartAdded: true,
+      );
+    }
+    else{
+      state = state.copyWith(
+        qty: state.quantity,
+        product: product,
+        isCartAdded: state.addedToCart,
+      );
+    }
+    
+
   }
 
   increaseQty() {
@@ -32,10 +48,10 @@ class ProductDetailController extends StateNotifier<ProductDetailModel> {
   }
 
   addRemoveFromCardTocart(BuildContext context) async {
-
     final prefs = await SharedPreferences.getInstance();
-    if (state.addedToCart == true) {
+    if (state.addedToCart == false) {
       prefs.setInt("productId_${state.product!.id!}", state.quantity!);
+      print("added shared pref");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -50,10 +66,12 @@ class ProductDetailController extends StateNotifier<ProductDetailModel> {
       state = state.copyWith(
         qty: state.quantity,
         product: state.product,
-        isCartAdded: false,
+        isCartAdded: true,
       );
     } else {
       prefs.remove("productId_${state.product!.id!}");
+      print("removed shared pref");
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -68,7 +86,7 @@ class ProductDetailController extends StateNotifier<ProductDetailModel> {
       state = state.copyWith(
         qty: state.quantity,
         product: state.product,
-        isCartAdded: true,
+        isCartAdded: false,
       );
     }
   }
