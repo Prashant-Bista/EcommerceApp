@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../common/enums/categories.dart';
 import 'home_page_controller.dart';
 import 'home_page_model.dart';
 
@@ -48,7 +47,7 @@ class HomePageView extends ConsumerWidget {
                       physics: AlwaysScrollableScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: Categories.values.length,
+                      itemCount: homeController.categories.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(2.0),
@@ -65,7 +64,7 @@ class HomePageView extends ConsumerWidget {
                                   BoxShadow(
                                     color:
                                     homeData.selectedCategory ==
-                                        Categories.values[index]
+                                        homeController.categories[index]
                                         ? Colors.deepPurple
                                         : Colors.tealAccent,
                                     blurRadius: 10,
@@ -74,20 +73,20 @@ class HomePageView extends ConsumerWidget {
                                 ],
                                 color:
                                 homeData.selectedCategory ==
-                                    Categories.values[index]
+                                    homeController.categories[index]
                                     ? Colors.deepPurple
                                     : Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                Categories.values[index].toString().replaceAll(
+                                homeController.categories[index].toString().replaceAll(
                                   "Categories.",
                                   "",
                                 ),
                                 style: TextStyle(
                                   color:
                                   homeData.selectedCategory ==
-                                      Categories.values[index]
+                                      homeController.categories[index]
                                       ? Colors.white
                                       : Colors.black,
                                   fontSize: 12,
