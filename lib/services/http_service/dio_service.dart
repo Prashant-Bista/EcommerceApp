@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/common/model/product_model.dart';
 
+import '../../pages/user_page/use_model.dart';
+
 class DioService {
   final Dio dio = Dio(
     BaseOptions(
@@ -45,6 +47,17 @@ class DioService {
     }
     return null;
   }
+  Future<List<UserModel>?> fetchUser() async{
+    List<UserModel> users= [];
+    Response response  = await dio.get("users");
+    if(response.statusCode == 200){
+      List<Map<String,dynamic>> result = response.data;
+      users= result.map((eachJson)=>UserModel.fromJson(eachJson)).toList();
+      return users;
+    }
+    return null;
+  }
+
 
 }
  DioService get dioService => DioService();

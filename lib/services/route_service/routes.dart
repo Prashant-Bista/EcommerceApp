@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/common/model/product_model.dart';
 import 'package:ecommerce_app/pages/main_screen/main_screen_view.dart';
 import 'package:ecommerce_app/pages/product_details/product_details_view.dart';
+import 'package:ecommerce_app/pages/user_page/users_list_view.dart';
 import 'package:ecommerce_app/services/route_service/route_constants.dart';
 import 'package:ecommerce_app/services/route_service/route_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +45,16 @@ GoRouter router = GoRouter(
             routeController.setContext(context: context);
             Map<String, dynamic>? extra = state.extra as Map<String,dynamic>;
             return ProductDetailsView(product: extra.isNotEmpty?extra["product"]:ProductModel.initial());
-          })
+          }),
+          GoRoute(path: RouteConstants.userListView,name: RouteConstants.userListView,builder: (context,state){
+            routeController.setContext(context: context);
+            return UsersListView();
+          }),
+          GoRoute(path: RouteConstants.userProfile,name: RouteConstants.userProfile,builder: (context,state){
+            routeController.setContext(context: context);
+            Map<String, dynamic>? extra = state.extra as Map<String,dynamic>;
+            return ProductDetailsView(product: extra.isNotEmpty?extra["product"]:ProductModel.initial());
+          }),
         ]
     ),
 

@@ -23,7 +23,7 @@ routeToSplashPage({bool shouldRemovePrevious=false, Map<String,dynamic>? extra})
         }
     }
 }
-  routeToHomePage({bool shouldRemovePrevious=false, Map<String,dynamic>? extra}){
+  routeToHomePage({bool shouldRemovePrevious=false, }){
     if(ctx!=null){
       if(shouldRemovePrevious) {
         ctx?.goNamed(RouteConstants.homePage);
@@ -45,16 +45,39 @@ routeToSplashPage({bool shouldRemovePrevious=false, Map<String,dynamic>? extra})
   }
   }
   }
-  routeToMainScreen({bool shouldRemovePrevious=false,Map<String,dynamic>? extra}){
+  routeToMainScreen({bool shouldRemovePrevious=false,}){
     if(ctx!=null){
       if(shouldRemovePrevious){
-        ctx?.goNamed(RouteConstants.mainScreen,extra: extra);
+        ctx?.goNamed(RouteConstants.mainScreen,);
       }
       else{
-        ctx?.pushNamed(RouteConstants.mainScreen,extra: extra);
+        ctx?.pushNamed(RouteConstants.mainScreen,);
+      }
+    }
+
+  }
+
+  routeToUserListView({bool shouldRemovePrevious=false,}){
+    if(ctx!=null){
+      if(shouldRemovePrevious){
+        ctx?.goNamed(RouteConstants.userListView,);
+      }
+      else{
+        ctx?.pushNamed(RouteConstants.userListView,);
       }
     }
   }
+  routeToUserProfile({bool shouldRemovePrevious=false,Map<String,dynamic>? extra}){
+    if(ctx!=null){
+      if(shouldRemovePrevious){
+        ctx?.goNamed(RouteConstants.userListView,extra: extra);
+      }
+      else{
+        ctx?.pushNamed(RouteConstants.userListView,extra: extra);
+      }
+    }
+  }
+
 
 
 
