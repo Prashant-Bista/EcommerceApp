@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/pages/home_page/home_page_view.dart';
 import 'package:ecommerce_app/pages/main_screen/main_controller.dart';
 import 'package:ecommerce_app/pages/main_screen/main_model.dart';
+import 'package:ecommerce_app/pages/user_page/users_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +16,6 @@ class MainScreenView extends ConsumerWidget {
       return MainController();
     },
   );
-  List<Widget> pages = [HomePageView(),ShoppingCart()];
   @override
   Widget build(BuildContext context,ref) {
     mainData = ref.watch(mainPageProvider);

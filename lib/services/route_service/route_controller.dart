@@ -70,10 +70,10 @@ routeToSplashPage({bool shouldRemovePrevious=false, Map<String,dynamic>? extra})
   routeToUserProfile({bool shouldRemovePrevious=false,Map<String,dynamic>? extra}){
     if(ctx!=null){
       if(shouldRemovePrevious){
-        ctx?.goNamed(RouteConstants.userListView,extra: extra);
+        ctx?.goNamed(RouteConstants.userProfile,extra: extra);
       }
       else{
-        ctx?.pushNamed(RouteConstants.userListView,extra: extra);
+        ctx?.pushNamed(RouteConstants.userProfile,extra: extra);
       }
     }
   }

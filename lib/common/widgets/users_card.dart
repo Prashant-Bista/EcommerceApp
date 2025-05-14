@@ -1,8 +1,9 @@
+import 'package:ecommerce_app/pages/user_page/use_model.dart';
 import 'package:flutter/material.dart';
 
 class UsersCard extends StatelessWidget {
-  final dynamic user;
-  const UsersCard({super.key, required this.user});
+  UserModel user;
+   UsersCard({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class UsersCard extends StatelessWidget {
           CircleAvatar(
             radius: 35,
             child: Text(
-              '${user['name']['firstname'][0]}${user['name']['lastname'][0]}',
+              '${user.firstName![0]}${user.lastName![0]}',
               style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
             ),
           ),
@@ -22,11 +23,11 @@ class UsersCard extends StatelessWidget {
             height: 8,
           ),
           Text(
-            '${user['name']['firstname']}${user['name']['lastname']}',
+            '${user.firstName}${user.lastName}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           Text(
-            '${user['email']}',
+            '${user.email}',
           ),
         ],
       ),

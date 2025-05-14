@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/common/model/product_model.dart';
 import 'package:ecommerce_app/pages/main_screen/main_screen_view.dart';
 import 'package:ecommerce_app/pages/product_details/product_details_view.dart';
+import 'package:ecommerce_app/pages/user_page/use_model.dart';
+import 'package:ecommerce_app/pages/user_page/user_profile.dart';
 import 'package:ecommerce_app/pages/user_page/users_list_view.dart';
 import 'package:ecommerce_app/services/route_service/route_constants.dart';
 import 'package:ecommerce_app/services/route_service/route_controller.dart';
@@ -53,7 +55,7 @@ GoRouter router = GoRouter(
           GoRoute(path: RouteConstants.userProfile,name: RouteConstants.userProfile,builder: (context,state){
             routeController.setContext(context: context);
             Map<String, dynamic>? extra = state.extra as Map<String,dynamic>;
-            return ProductDetailsView(product: extra.isNotEmpty?extra["product"]:ProductModel.initial());
+            return UserProfile(user: extra.isNotEmpty?extra["user"]:UserModel.initial());
           }),
         ]
     ),

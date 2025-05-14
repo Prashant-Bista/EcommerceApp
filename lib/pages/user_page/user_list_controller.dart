@@ -5,9 +5,10 @@ import '../../services/http_service/dio_service.dart';
 
 class UserListController extends StateNotifier<UserListModel>{
   List<UserModel>? allUsers=[];
-  UserListController({UserListModel? state}):super(state??UserListModel.initial());
-
-  Future<void> _fetchUsers() async {
+  UserListController({UserListModel? state}):super(state??UserListModel.initial()){
+    fetchUsers();
+  }
+  Future<void> fetchUsers() async {
     allUsers = await dioService.fetchUser();
     state = state.copyWith(listOfUsers: allUsers);
   }

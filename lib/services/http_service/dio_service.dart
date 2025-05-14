@@ -51,8 +51,10 @@ class DioService {
     List<UserModel> users= [];
     Response response  = await dio.get("users");
     if(response.statusCode == 200){
-      List<Map<String,dynamic>> result = response.data;
-      users= result.map((eachJson)=>UserModel.fromJson(eachJson)).toList();
+      List<dynamic> result = response.data;
+      result.forEach((json){
+        users.add(UserModel.fromJson(json));
+      } );
       return users;
     }
     return null;
