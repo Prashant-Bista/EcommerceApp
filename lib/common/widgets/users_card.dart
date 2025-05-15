@@ -26,9 +26,11 @@ class UsersCard extends StatelessWidget {
             '${user.firstName}${user.lastName}',
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text(
-            '${user.email}',
-          ),
+    Expanded(
+      child: Text(
+    '${user.email}',overflow: TextOverflow.ellipsis,
+      ),
+    ),
         ],
       ),
     );

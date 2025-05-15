@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/common/model/product_model.dart';
+import 'package:ecommerce_app/pages/payment_integration/esewa/esewa_controller.dart';
 import 'package:ecommerce_app/pages/product_details/product_detail_controller.dart';
 import 'package:ecommerce_app/pages/product_details/product_detail_model.dart';
 import 'package:flutter/material.dart';
@@ -10,12 +11,12 @@ import '../../common/widgets/custom_app_bar.dart';
 class ProductDetailsView extends ConsumerWidget {
   final ProductModel product;
   ProductDetailsView({super.key, required this.product});
- late  final productDetailControllerProvider=StateNotifierProvider<ProductDetailController,ProductDetailModel>((ref){
-  return ProductDetailController(state: ProductDetailModel(quantity: 1,product: product,addedToCart: false));
+  late  final productDetailControllerProvider=StateNotifierProvider<ProductDetailController,ProductDetailModel>((ref){
+    return ProductDetailController(state: ProductDetailModel(quantity: 1,product: product,addedToCart: false));
   });
   late ProductDetailController productDetailController;
   late ProductDetailModel productDetailData;
-
+  EsewaController esewaController = EsewaController();
   @override
   Widget build(BuildContext context,ref) {
     productDetailController = ref.watch(productDetailControllerProvider.notifier);
@@ -129,7 +130,9 @@ class ProductDetailsView extends ConsumerWidget {
                 children: [
                   Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          esewaController.pay(productDetailData.quantity!.toDouble()*productDetailData.product!.price!, productDetailData.product!.id.toString(), context);
+                        },
                         style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             shape: RoundedRectangleBorder(
@@ -149,7 +152,7 @@ class ProductDetailsView extends ConsumerWidget {
                   Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-productDetailController.addRemoveFromCardTocart(context);                        },
+                          productDetailController.addRemoveFromCardTocart(context);                        },
                         style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             shape: RoundedRectangleBorder(

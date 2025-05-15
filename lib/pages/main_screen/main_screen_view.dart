@@ -1,14 +1,14 @@
-import 'package:ecommerce_app/pages/home_page/home_page_view.dart';
 import 'package:ecommerce_app/pages/main_screen/main_controller.dart';
 import 'package:ecommerce_app/pages/main_screen/main_model.dart';
-import 'package:ecommerce_app/pages/user_page/users_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../cart_page/shopping_cart.dart';
-
+late final heightWidthProvider;
 class MainScreenView extends ConsumerWidget {
   MainScreenView({super.key});
+  late double deviceHeight;
+  late double deviceWidth;
+  late Size size;
   late MainPageModel mainData;
   late MainController mainPageController;
   final mainPageProvider =   StateNotifierProvider<MainController, MainPageModel>(
@@ -20,9 +20,14 @@ class MainScreenView extends ConsumerWidget {
   Widget build(BuildContext context,ref) {
     mainData = ref.watch(mainPageProvider);
     mainPageController = ref.watch(mainPageProvider.notifier);
+    size = MediaQuery.of(context).size;
+    deviceHeight = size.height;
+    deviceWidth = size.width;
     return  Column(
       children: [
-        mainData.screens![mainData.currentPageIndex],
+        Expanded(
+          child:  mainData.screens![mainData.currentPageIndex],
+        ),
         BottomNavigationBar(
           currentIndex: mainData.currentPageIndex,
           onTap: (index){
