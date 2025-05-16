@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  esewa_flutter_sdk:
+    path: ./esewa_flutter_sdk
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,11 +43,16 @@ dependencies:
   flutter_svg: ^2.1.0
   skeletonizer: ^1.4.3
   shared_preferences: ^2.5.3
-  esewa_flutter: ^2.0.0
+  webview_flutter: ^4.11.0
+  webview_flutter_android: ^4.5.0
+  webview_flutter_wkwebview: ^3.21.0
+  desktop_webview_window: ^0.2.3
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

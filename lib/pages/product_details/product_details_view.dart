@@ -1,10 +1,12 @@
+
 import 'package:ecommerce_app/common/model/product_model.dart';
-import 'package:ecommerce_app/pages/payment_integration/esewa/esewa_controller.dart';
+import 'package:ecommerce_app/pages/payment_integration/esewa_payment_controller.dart';
 import 'package:ecommerce_app/pages/product_details/product_detail_controller.dart';
 import 'package:ecommerce_app/pages/product_details/product_detail_model.dart';
+import 'package:esewa_flutter_sdk/esewa_payment.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../common/widgets/custom_app_bar.dart';
 
 
@@ -16,12 +18,12 @@ class ProductDetailsView extends ConsumerWidget {
   });
   late ProductDetailController productDetailController;
   late ProductDetailModel productDetailData;
-  EsewaController esewaController = EsewaController();
+  EsewaPaymentController esewaController =EsewaPaymentController();
   @override
   Widget build(BuildContext context,ref) {
     productDetailController = ref.watch(productDetailControllerProvider.notifier);
     productDetailData  = ref.watch(productDetailControllerProvider);
-    int quantity = 1;
+
     return Scaffold(
       appBar: CustomAppBar(
         title: productDetailData.product!.title!,
@@ -130,8 +132,8 @@ class ProductDetailsView extends ConsumerWidget {
                 children: [
                   Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          esewaController.pay(productDetailData.quantity!.toDouble()*productDetailData.product!.price!, productDetailData.product!.id.toString(), context);
+                        onPressed: () async{
+esewaController.makePayment(produtId: productDetailData.product!.id.toString(), productName: productDetailData.product!.title, productPrice: (productDetailData.product!.price! *productDetailData.quantity!.toDouble()).toString(), context: context);
                         },
                         style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 4),

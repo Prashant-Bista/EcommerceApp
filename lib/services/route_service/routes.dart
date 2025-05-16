@@ -20,12 +20,12 @@ GoRouter router = GoRouter(
   initialLocation: RouteConstants.splash,
   routes: [
     GoRoute(
-      path: RouteConstants.splash,
-      name: RouteConstants.splash,
-      builder: (context, state) {
-        routeController.setContext(context: context);
-        return SplashView(key: state.pageKey);
-      },
+        path: RouteConstants.splash,
+        name: RouteConstants.splash,
+        builder: (context, state) {
+          routeController.setContext(context: context);
+          return SplashView(key: state.pageKey);
+        },
         routes: [
           GoRoute(
             path: RouteConstants.mainScreen,
