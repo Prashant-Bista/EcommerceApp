@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:ecommerce_app/common/model/product_model.dart';
+import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 
 import '../../pages/user_page/use_model.dart';
 
@@ -59,8 +60,14 @@ class DioService {
     }
     return null;
   }
-
-
+ Future<Response> callVerificationApi(EsewaPaymentSuccessResult result)async {
+   Response response = await dio.get(
+       "https://rc.esewa.com.np/mobile/transaction?txnRefId=${result.refId}",options: Options(contentType: "application/json",),data: {
+         "merchantId":"JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R",
+     "merchantSecret":"BhwIWQQADhIYSxILExMcAgFXFhcOBwAKBgAXEQ=="
+   });
+   return response;
+ }
 }
  DioService get dioService => DioService();
 

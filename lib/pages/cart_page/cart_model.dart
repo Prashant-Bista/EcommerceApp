@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/common/model/product_model.dart';
 
 class CartModel{
+
   List<EachCartItemModel>? cartItems;
   CartModel({this.cartItems});
   factory CartModel.initial(){
